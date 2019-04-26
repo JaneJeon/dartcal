@@ -1,0 +1,14 @@
+{
+  "repository": "JaneJeon/dEventLoop",
+  "author": "Jane Jeon <JaneJeon9719@gmail.com>",
+  "license": "AGPL-3.0",
+  "private": true,
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^1.17.0"
+  },
+  "prettier": {
+    "semi": false
+  }
+}
