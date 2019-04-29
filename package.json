@@ -4,8 +4,14 @@
   "license": "AGPL-3.0",
   "private": true,
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "html-to-text": "^5.1.1",
+    "ibm-watson": "^4.0.2",
+    "rss-parser": "^3.7.0"
+  },
   "devDependencies": {
+    "@types/html-to-text": "^1.4.31",
     "prettier": "^1.17.0"
   },
   "prettier": {
