@@ -1,7 +1,11 @@
 require("dotenv").config()
+const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1")
+const nlu = new NaturalLanguageUnderstandingV1({
+  version: "2019-04-02",
+  url: "https://gateway.watsonplatform.net/natural-language-understanding/api"
+})
 
 const Parser = require("rss-parser")
-const htmlToText = require("html-to-text")
 
 const hello = async () => {
   const parser = new Parser()
@@ -13,22 +17,25 @@ const hello = async () => {
    * - replies w/o context; e.g. "*clarification because the date was only in the subject line* The show is on
    *  Monday :-) see you there"
    */
-  feed.items.forEach(item => {
+  let i = 0
+  for (let i = 0; i < 3; i++) {
+    const item = feed.items[i]
     delete item.contentSnippet
     delete item.author
-    console.log(JSON.stringify(item, null, 2))
-    console.log(
-      htmlToText
-        .fromString(item.content.replace(/\[[^\[]+]/g, ""), {
-          wordwrap: false,
-          ignoreImage: true,
-          singleNewLineParagraphs: true
-        })
-        .replace(/\n{2,}/g, "\n")
-    )
-    console.log("---------------------------------------------------")
-    // creator, title, link, isoDate, guid
-  })
+
+    const result = await nlu.analyze({
+      html: item.content,
+      features: {
+        categories: {},
+        concepts: {},
+        entities: {},
+        keywords: {}
+      }
+    })
+
+    console.log(result)
+    console.log(item)
+  }
 }
 
 hello().catch(console.error)
