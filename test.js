@@ -2,8 +2,10 @@ require("dotenv").config()
 const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1")
 const nlu = new NaturalLanguageUnderstandingV1({
   version: "2019-04-02",
-  url: "https://gateway.watsonplatform.net/natural-language-understanding/api"
+  url: "https://gateway.watsonplatform.net/natural-language-understanding/api",
+  iam_apikey: process.env.IAM_API_KEY
 })
+const event = require("./lib/event")
 
 const Parser = require("rss-parser")
 
@@ -20,21 +22,17 @@ const hello = async () => {
   let i = 0
   for (let i = 0; i < 3; i++) {
     const item = feed.items[i]
-    delete item.contentSnippet
-    delete item.author
 
     const result = await nlu.analyze({
-      html: item.content,
+      text: event.clean(item),
       features: {
-        categories: {},
-        concepts: {},
-        entities: {},
-        keywords: {}
+        entities: {
+          model: process.env.MODEL_ID
+        }
       }
     })
 
-    console.log(result)
-    console.log(item)
+    console.log(JSON.stringify(result, null, 2))
   }
 }
 
