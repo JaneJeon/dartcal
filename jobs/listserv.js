@@ -38,4 +38,5 @@ module.exports = async () => {
 
   // TODO: do something with this info
   const infos = await Promise.all(eventPromises)
+  debug("event infos: %o", infos)
 }

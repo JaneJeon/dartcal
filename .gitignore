@@ -1,8 +1,8 @@
 node_modules
 .DS_Store
 *.log
-.idea
 credentials.json
+token.json
 ibm-credentials.env
 .env
 documents/*.txt

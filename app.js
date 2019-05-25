@@ -10,16 +10,32 @@ const app = express()
 const hbs = require("hbs")
 const path = require("path")
 const debug = require("debug")("dartcal:app")
+const createError = require("http-errors")
 
 // hbs.registerPartials(path.join(__dirname, "views/partials"))
 
 app
   .use(require("helmet"))
-  // .use(express.static(path.join(__dirname, "public")))
-  // .set("views", path.join(__dirname, "views"))
-  // .set("view engine", "hbs")
+  .use(require("morgan")("dev"))
+  // .use(express.urlencoded({ extended: false }))
+  .use(express.static(path.join(__dirname, "public")))
+  .set("views", path.join(__dirname, "views"))
+  .set("view engine", "hbs")
   .get("/", async (req, res) => {
     //
+  })
+  .use((req, res, next) => {
+    // catch 404 and forward it to error handler
+    next(createError(404))
+  })
+  .use((err, req, res, next) => {
+    // set locals, only providing error in development
+    res.locals.message = err.message
+    res.locals.error = req.app.get("env") === "development" ? err : {}
+
+    // render the error page
+    res.status(err.status || 500)
+    res.render("error")
   })
 
 app.listen(process.env.PORT, err => {
