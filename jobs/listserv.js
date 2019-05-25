@@ -14,7 +14,7 @@ module.exports = async () => {
 
   debug("Checking", feed.title)
 
-  feed.items.forEach(item => {
+  const eventPromises = feed.items.map(async item => {
     debug("item: %o", item)
 
     const cleaned = event.clean(item)
@@ -33,6 +33,9 @@ module.exports = async () => {
     const info = event.extract(result.entities, item)
     debug("extracted info: %o", info)
 
-    // TODO: do something with this info
+    return info
   })
+
+  // TODO: do something with this info
+  const infos = await Promise.all(eventPromises)
 }
