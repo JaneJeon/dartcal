@@ -23,6 +23,9 @@ const hello = async () => {
     const item = feed.items[i]
     debug("item: %o", item)
 
+    const cleaned = event.clean(item)
+    if (!cleaned) continue
+
     const result = await nlu.analyze({
       text: event.clean(item),
       features: {
