@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node app",
     "watch": "DEBUG=dartcal:* nodemon app",
+    "train": "node train",
     "clean": "rm -rf documents/*.txt"
   },
   "dependencies": {

@@ -5,3 +5,4 @@ node_modules
 credentials.json
 ibm-credentials.env
 .env
+documents/*.txt
