@@ -6,6 +6,7 @@ const nlu = new NaturalLanguageUnderstandingV1({
 })
 const Parser = require("rss-parser")
 const event = require("../lib/event")
+const calendar = require("../lib/calendar")
 const debug = require("debug")("dartcal:jobs:listserv")
 
 module.exports = async () => {
@@ -17,8 +18,10 @@ module.exports = async () => {
   const eventPromises = feed.items.map(async item => {
     debug("item: %o", item)
 
+    // parse disgusting, ugly, email HTML
     if (!event.clean(item)) return
 
+    // feed to Watson
     const result = await nlu.analyze({
       text: item.content,
       features: {
@@ -29,13 +32,36 @@ module.exports = async () => {
     })
     debug("entities: %o", result.entities)
 
+    // extract key event info
     const info = event.extract(result.entities, item)
     debug("extracted info: %o", info)
 
     return info
   })
 
-  // TODO: do something with this info
-  const infos = await Promise.all(eventPromises)
-  debug("event infos: %o", infos)
+  const events = await Promise.all(eventPromises)
+  debug("event infos: %o", events)
+
+  // insert events, or if they fail, try to update them
+  const gcalPromises = events.map(async evt => {
+    // we don't want a single failure to bring the entire promise.all down.
+    // so use this ugly AF hack: https://stackoverflow.com/a/46024590
+    try {
+      return calendar.insert(evt)
+    } catch (err) {
+      console.error(err)
+
+      // it is possible that calendar insert failed because there already was an event.
+      // in that case, update the event
+      try {
+        return calendar.update(evt)
+      } catch (err2) {
+        console.error(err2)
+
+        return err2
+      }
+    }
+  })
+
+  await Promise.all(gcalPromises)
 }
