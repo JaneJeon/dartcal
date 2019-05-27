@@ -17,11 +17,10 @@ module.exports = async () => {
   const eventPromises = feed.items.map(async item => {
     debug("item: %o", item)
 
-    const cleaned = event.clean(item)
-    if (!cleaned) return
+    if (!event.clean(item)) return
 
     const result = await nlu.analyze({
-      text: event.clean(item),
+      text: item.content,
       features: {
         entities: {
           model: process.env.MODEL_ID

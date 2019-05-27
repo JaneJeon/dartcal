@@ -17,12 +17,12 @@ const createError = require("http-errors")
 app
   .use(require("helmet"))
   .use(require("morgan")("dev"))
-  // .use(express.urlencoded({ extended: false }))
+  .use(express.urlencoded({ extended: false }))
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "hbs")
   .get("/", async (req, res) => {
-    //
+    // TODO:
   })
   .use((req, res, next) => {
     // catch 404 and forward it to error handler
