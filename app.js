@@ -44,8 +44,7 @@ app
 
     // render the error page
     res.status(err.status || 500)
-    // res.render("error")
-    res.end()
+    res.render("error")
   })
 
 app.listen(process.env.PORT || 3000, err => {
