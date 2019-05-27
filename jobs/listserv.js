@@ -16,7 +16,7 @@ module.exports = async () => {
   debug("Checking", feed.title)
 
   const eventPromises = feed.items.map(async item => {
-    debug("item: %o", item)
+    // debug("item: %o", item)
 
     // parse disgusting, ugly, email HTML
     if (!event.clean(item)) return
@@ -30,11 +30,11 @@ module.exports = async () => {
         }
       }
     })
-    debug("entities: %o", result.entities)
+    // debug("entities: %o", result.entities)
 
     // extract key event info
     const info = event.extract(result.entities, item)
-    debug("extracted info: %o", info)
+    // debug("extracted info: %o", info)
 
     return info
   })
@@ -47,14 +47,14 @@ module.exports = async () => {
     // we don't want a single failure to bring the entire promise.all down.
     // so use this ugly AF hack: https://stackoverflow.com/a/46024590
     try {
-      return calendar.insert(evt)
+      return await calendar.insert(evt)
     } catch (err) {
       console.error(err)
 
       // it is possible that calendar insert failed because there already was an event.
       // in that case, update the event
       try {
-        return calendar.update(evt)
+        return await calendar.update(evt)
       } catch (err2) {
         console.error(err2)
 
@@ -63,5 +63,7 @@ module.exports = async () => {
     }
   })
 
+  debug("syncing calendar...")
   await Promise.all(gcalPromises)
+  debug("job finished successfully!")
 }
