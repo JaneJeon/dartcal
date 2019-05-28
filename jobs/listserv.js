@@ -15,55 +15,51 @@ module.exports = async () => {
 
   debug("Checking", feed.title)
 
-  const eventPromises = feed.items.map(async item => {
-    // debug("item: %o", item)
+  for (const item of feed.items) {
+    debug("processing item")
 
-    // parse disgusting, ugly, email HTML
-    if (!event.clean(item)) return
+    try {
+      // debug("item: %o", item)
 
-    // feed to Watson
-    const result = await nlu.analyze({
-      text: item.content,
-      features: {
-        entities: {
-          model: process.env.MODEL_ID
+      // parse disgusting, ugly, email HTML
+      if (!event.clean(item)) continue
+
+      // feed to Watson
+      const result = await nlu.analyze({
+        text: item.content,
+        features: {
+          entities: {
+            model: process.env.MODEL_ID
+          }
+        }
+      })
+      // debug("entities: %o", result.entities)
+
+      // extract key event info
+      const info = event.extract(result.entities, item)
+      if (!info) continue
+      // debug("extracted info: %o", info)
+
+      // insert events
+      try {
+        await calendar.insert(info)
+      } catch (err) {
+        console.error(err)
+
+        // it is possible that calendar insert failed because there already was an event.
+        // in that case, update the event
+        try {
+          await calendar.update(info)
+        } catch (err2) {
+          console.error(err2)
+
+          return err2
         }
       }
-    })
-    // debug("entities: %o", result.entities)
-
-    // extract key event info
-    const info = event.extract(result.entities, item)
-    // debug("extracted info: %o", info)
-
-    return info
-  })
-
-  const events = await Promise.all(eventPromises)
-  debug("event infos: %o", events)
-
-  // insert events, or if they fail, try to update them
-  const gcalPromises = events.map(async evt => {
-    // we don't want a single failure to bring the entire promise.all down.
-    // so use this ugly AF hack: https://stackoverflow.com/a/46024590
-    try {
-      return await calendar.insert(evt)
     } catch (err) {
       console.error(err)
-
-      // it is possible that calendar insert failed because there already was an event.
-      // in that case, update the event
-      try {
-        return await calendar.update(evt)
-      } catch (err2) {
-        console.error(err2)
-
-        return err2
-      }
     }
-  })
+  }
 
-  debug("syncing calendar...")
-  await Promise.all(gcalPromises)
   debug("job finished successfully!")
 }
