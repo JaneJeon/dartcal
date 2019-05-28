@@ -11,7 +11,6 @@ const express = require("express")
 const app = express()
 const hbs = require("hbs")
 const path = require("path")
-const calendar = require("./lib/calendar")
 const debug = require("debug")("dartcal:app")
 const createError = require("http-errors")
 
@@ -24,13 +23,7 @@ app
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "hbs")
-  .get("/", async (req, res) => {
-    // TODO:
-  })
-  .get("/events", async (req, res) => {
-    debug(await calendar.list())
-    res.end()
-  })
+  .post("/")
   .use((req, res, next) => {
     // catch 404 and forward it to error handler
     next(createError(404))
