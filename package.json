@@ -25,7 +25,7 @@
     "node-cron": "^2.0.3",
     "pm2": "^3.5.1",
     "rfc4648": "^1.2.1",
-    "rss-parser": "^3.7.0"
+    "rss-parser": "^3.7.2"
   },
   "devDependencies": {
     "husky": "^2.3.0",
