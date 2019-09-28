@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "googleapis": "^43.0.0",
-    "hbs": "^4.0.4",
+    "hbs": "^4.0.5",
     "helmet": "^3.21.1",
     "html-to-text": "^5.1.1",
     "http-errors": "^1.7.3",
