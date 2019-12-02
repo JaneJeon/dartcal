@@ -109,13 +109,6 @@
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.4.2.tgz#9b33d5c9fcebff17139521753eaf992ed5ace8e4"
   integrity sha512-bWBbC7VG2jdjbgZMX0qpds8U/3h3anfIqE81L8jmVrgFZw/urEDnBA78ymGGKTTK6ciBXmmJ/xlok+Re41S8ww==
 
-"@types/csv-stringify@^1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@types/csv-stringify/-/csv-stringify-1.4.3.tgz#538326331445809293fe8755694173dd01590f32"
-  integrity sha512-vfbvOBhuTjDYQjdG8dCxLjOsyQMjCE0oN0bIUkJtiolqkCe1WTCjh36w4hEhtkdLHUgsB4aN4r6SFD8iLJgiGQ==
-  dependencies:
-    "@types/node" "*"
-
 "@types/extend@^3.0.1", "@types/extend@~3.0.0":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@types/extend/-/extend-3.0.1.tgz#923dc2d707d944382433e01d6cc0c69030ab2c75"
@@ -157,6 +150,13 @@
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
+
+"@types/websocket@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/websocket/-/websocket-1.0.0.tgz#828c794b0a50949ad061aa311af1009934197e4b"
+  integrity sha512-MLr8hDM8y7vvdAdnoDEP5LotRoYJj7wgT6mWzCUQH/gHqzS4qcnOT/K4dhC0WimWIUiA3Arj9QAJGGKNRiRZKA==
+  dependencies:
+    "@types/node" "*"
 
 abbrev@1:
   version "1.1.1"
@@ -1491,16 +1491,16 @@ ibm-cloud-sdk-core@^1.0.0:
     semver "^6.2.0"
     vcap_services "~0.3.4"
 
-ibm-watson@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/ibm-watson/-/ibm-watson-5.1.0.tgz#d2f1229b5e3f122d0deec22887e1eb508ff4608e"
-  integrity sha512-MzOfuRi9gplqZkXANiFseAJtGjXCJiR7357ywOTbgcAnAf7twPLyYWVS65D13WutfYaW0FuUXqc6MYEWG37P3A==
+ibm-watson@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/ibm-watson/-/ibm-watson-5.2.0.tgz#4ffd9f3a1f324111a029f6eda3698d992252b716"
+  integrity sha512-A4zo4EMaGvnNPOHRzbYuEQHRH/JY1iiFF0cbXAqL/MAIFrZDKz4AuZHMHBm8VZv4cE0dAQdaw6DJt8buCr5+uQ==
   dependencies:
     "@types/async" "^2.4.2"
-    "@types/csv-stringify" "^1.4.3"
     "@types/extend" "^3.0.1"
     "@types/isstream" "^0.1.0"
     "@types/node" "^11.9.4"
+    "@types/websocket" "^1.0.0"
     async "^2.6.2"
     axios "^0.18.0"
     camelcase "^5.3.1"
