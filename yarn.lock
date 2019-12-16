@@ -1479,10 +1479,10 @@ husky@^3.1.0:
     run-node "^1.0.0"
     slash "^3.0.0"
 
-ibm-cloud-sdk-core@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ibm-cloud-sdk-core/-/ibm-cloud-sdk-core-1.0.0.tgz#c8a87f64756a81ae6c9f984bf629cbee6d683b33"
-  integrity sha512-J7nSKw6X68YgZnZkUP9Qzl/rYlCHVOnXDnEidNxYSyLGZ4PijXXWeTdIUNvxGt0beYj0aQH8viX6ZUSnHVKZSQ==
+ibm-cloud-sdk-core@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/ibm-cloud-sdk-core/-/ibm-cloud-sdk-core-1.3.1.tgz#c111343350a7949d15c45123a23a0604fdfe28a2"
+  integrity sha512-fGaJxJeXWGjHQ478vPUm2RSxUXjNEaoy3mpaUG4iQvJ6Yi29Mw/qtz6IoNEzoowSKvsW/whqblVEqiOBGRTrog==
   dependencies:
     "@types/extend" "~3.0.0"
     "@types/file-type" "~5.2.1"
@@ -1490,6 +1490,7 @@ ibm-cloud-sdk-core@^1.0.0:
     "@types/node" "~10.14.19"
     axios "^0.18.0"
     camelcase "^5.3.1"
+    debug "^4.1.1"
     dotenv "^6.2.0"
     extend "~3.0.2"
     file-type "^7.7.1"
@@ -1503,10 +1504,10 @@ ibm-cloud-sdk-core@^1.0.0:
     semver "^6.2.0"
     vcap_services "~0.3.4"
 
-ibm-watson@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/ibm-watson/-/ibm-watson-5.2.0.tgz#4ffd9f3a1f324111a029f6eda3698d992252b716"
-  integrity sha512-A4zo4EMaGvnNPOHRzbYuEQHRH/JY1iiFF0cbXAqL/MAIFrZDKz4AuZHMHBm8VZv4cE0dAQdaw6DJt8buCr5+uQ==
+ibm-watson@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/ibm-watson/-/ibm-watson-5.2.1.tgz#b64fd546746aa6d1ea8140e6af79ff29b17c127a"
+  integrity sha512-7Tj9yZSV+XZfkh6IqpsmEwc652CLtKQdTP+EgIZvuVJ7lBQv1j9rNX45fxAjjnbFce1Dsxv3P8kJfAodyvjk2w==
   dependencies:
     "@types/async" "^2.4.2"
     "@types/extend" "^3.0.1"
@@ -1517,7 +1518,7 @@ ibm-watson@^5.2.0:
     axios "^0.18.0"
     camelcase "^5.3.1"
     extend "~3.0.2"
-    ibm-cloud-sdk-core "^1.0.0"
+    ibm-cloud-sdk-core "^1.3.1"
     isstream "~0.1.2"
     websocket "^1.0.28"
 
