@@ -6,7 +6,9 @@
     "start": "pm2 start app.js",
     "watch": "DEBUG=dartcal:* nodemon app",
     "train": "node train",
-    "clean": "rm -rf documents/*.txt"
+    "clean": "rm -rf documents/*.txt",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "chrono-node": "^1.4.2",
@@ -40,5 +42,6 @@
       "post-merge": "yarn",
       "pre-commit": "prettier --write '**/*.js'"
     }
-  }
+  },
+  "snyk": true
 }
