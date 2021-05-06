@@ -11,7 +11,7 @@
     "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
-    "chrono-node": "^1.4.2",
+    "chrono-node": "^2.2.4",
     "dayjs": "^1.8.19",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
